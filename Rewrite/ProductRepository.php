@@ -159,7 +159,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function __call(string $name, array $arguments)
     {
         if (method_exists($this->original, $name)) {
-            return $this->original->$name($arguments);
+            return call_user_func_array(array($this->original, $name), $arguments);
         }
 
         trigger_error('Call to undefined method ' . __CLASS__ . '::' . $name . '()', E_USER_ERROR);

@@ -46,6 +46,7 @@ class ProductRepositoryTest extends TestCase
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\InputException
      * @throws \Magento\Framework\Exception\StateException
+     * @magentoAppArea adminhtml
      */
     public function testAddProduct()
     {
@@ -53,13 +54,15 @@ class ProductRepositoryTest extends TestCase
         $product = $this->fillInProduct($product);
 
         $this->productRepository->save($product);
+
         $searchCriteriaBuilder = $this->productRepository->getSearchCriteriaBuilder();
         $searchCriteriaBuilder->addFilter('sku', 'example_foobar');
         $searchCriteria = $searchCriteriaBuilder->create();
         $searchResults = $this->productRepository->getList($searchCriteria);
         $products = $searchResults->getItems();
-
         $this->assertCount(1, $products);
+
+        $this->productRepository->deleteById('example_foobar');
     }
 
     /**
