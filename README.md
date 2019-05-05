@@ -1,0 +1,2 @@
+# Yireo_ExampleRewriteComposition
+This Magento 2 module shows how you can rewrite a class using a DI preference rewrite. However, once your new class is called, instead of extending upon the original class, it is injecting the original class in the constructor instead (composition).
